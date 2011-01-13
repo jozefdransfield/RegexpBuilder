@@ -57,6 +57,11 @@ public class RegexBuilder {
         return this;
     }
 
+    public RegexBuilder or() {
+        regexp.append("|");
+        return this;
+    }
+
     public RegexBuilder matchWordCharactor() {
         regexp.append("\\w");
         return this;
@@ -92,8 +97,15 @@ public class RegexBuilder {
         return this;
     }
 
-    public RegexBuilder matchCharactorClass(CharactorClass cc) {
+    public RegexBuilder matchCharactorClass(CharactorClassBuilder cc) {
         regexp.append(cc.compile());
+        return this;
+    }
+
+    public RegexBuilder group(RegexBuilder builder) {
+        regexp.append("(");
+        regexp.append(builder.compile());
+        regexp.append(")");
         return this;
     }
 }
